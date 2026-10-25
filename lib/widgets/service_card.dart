@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class ServiceCard extends StatelessWidget {
@@ -26,10 +25,17 @@ class ServiceCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(
-                  icono,
-                  size: 36,
-                  color: Colors.blue,
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE3F2FD),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(
+                    icono,
+                    size: 32,
+                    color: Colors.blue,
+                  ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -44,10 +50,19 @@ class ServiceCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 12),
-            Text(descripcion),
+            Text(
+              descripcion,
+              style: const TextStyle(
+                fontSize: 16,
+                height: 1.4,
+              ),
+            ),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: onVerDetalle,
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(0, 48),
+              ),
               child: const Text('Ver detalle'),
             ),
           ],
