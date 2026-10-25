@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'screens/detail_screen.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -58,10 +58,11 @@ class MyApp extends StatelessWidget {
                           builder: (buttonContext) {
                             return ElevatedButton(
                               onPressed: () {
-                                ScaffoldMessenger.of(buttonContext).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                      'Seleccionó Facturación electrónica',
+                                Navigator.push(
+                                  buttonContext,
+                                  MaterialPageRoute(
+                                    builder: (context) => const DetailScreen(
+                                      nombreServicio: 'Facturación electrónica',
                                     ),
                                   ),
                                 );
