@@ -8,12 +8,14 @@ class HomeScreen extends StatelessWidget {
   void abrirDetalle(
       BuildContext context,
       String nombreServicio,
+      String descripcion,
       ) {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => DetailScreen(
           nombreServicio: nombreServicio,
+          descripcion: descripcion,
         ),
       ),
     );
@@ -52,6 +54,12 @@ class HomeScreen extends StatelessWidget {
                 abrirDetalle(
                   context,
                   'Facturación electrónica',
+                  'Este servicio permite emitir comprobantes '
+                      'electrónicos y organizar la información '
+                      'de ventas de su negocio.\n\n'
+                      'Incluye configuración inicial, '
+                      'capacitación y acompañamiento '
+                      'para utilizar el sistema.',
                 );
               },
             ),
@@ -65,6 +73,11 @@ class HomeScreen extends StatelessWidget {
                 abrirDetalle(
                   context,
                   'Desarrollo de sistemas',
+                  'Diseñamos aplicaciones según los procesos '
+                      'y necesidades de cada empresa.\n\n'
+                      'El servicio contempla el análisis de '
+                      'requerimientos, diseño de interfaces, '
+                      'desarrollo y pruebas de funcionamiento.',
                 );
               },
             ),
@@ -78,6 +91,12 @@ class HomeScreen extends StatelessWidget {
                 abrirDetalle(
                   context,
                   'Soporte técnico',
+                  'Brindamos asistencia para mantener '
+                      'operativos los recursos tecnológicos '
+                      'de su negocio.\n\n'
+                      'El servicio incluye diagnóstico de '
+                      'problemas, mantenimiento y revisión '
+                      'de equipos, servidores y redes.',
                 );
               },
             ),
