@@ -1,125 +1,164 @@
 import 'package:flutter/material.dart';
-import '../widgets/service_card.dart';
 import 'detail_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  void abrirDetalle(
-      BuildContext context,
-      String nombreServicio,
-      String descripcion,
-      ) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DetailScreen(
-          nombreServicio: nombreServicio,
-          descripcion: descripcion,
-        ),
-      ),
-    );
-  }
+  static const azul = Color(0xFF17324D);
+  static const verde = Color(0xFF007F82);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF3F6FA),
       appBar: AppBar(
-        title: const Text('Kisis Servicios'),
+        title: const Text('CYNERIS'),
+        backgroundColor: azul,
+        foregroundColor: Colors.white,
+        centerTitle: true,
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(16),
-                margin: const EdgeInsets.only(bottom: 20),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE3F2FD),
-                  borderRadius: BorderRadius.circular(16),
+      body: ListView(
+        padding: const EdgeInsets.all(20),
+        children: [
+          Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [azul, verde],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(24),
+            ),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.hub_outlined,
+                  color: Colors.white,
+                  size: 48,
                 ),
-                child: Image.asset(
-                  'assets/images/servicios.png',
-                  height: 90,
-                  fit: BoxFit.contain,
-                  semanticLabel: 'Servicios tecnológicos',
+                SizedBox(height: 20),
+                Text(
+                  'Tecnología que\nimpulsa tu negocio',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const Text(
-                'Nuestros servicios',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+                SizedBox(height: 12),
+                Text(
+                  'Soluciones digitales, desarrollo y soporte '
+                      'en un solo lugar.',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    height: 1.5,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'Seleccione un servicio para conocer más.',
-                style: TextStyle(fontSize: 16),
-              ),
-              const SizedBox(height: 20),
-              ServiceCard(
-                nombre: 'Facturación electrónica',
-                descripcion:
-                'Emita comprobantes electrónicos '
-                    'y organice las ventas de su negocio.',
-                icono: Icons.receipt_long,
-                onVerDetalle: () {
-                  abrirDetalle(
-                    context,
-                    'Facturación electrónica',
-                    'Este servicio permite emitir comprobantes '
-                        'electrónicos y organizar la información '
-                        'de ventas de su negocio.\n\n'
-                        'Incluye configuración inicial, '
-                        'capacitación y acompañamiento '
-                        'para utilizar el sistema.',
-                  );
-                },
-              ),
-              ServiceCard(
-                nombre: 'Desarrollo de sistemas',
-                descripcion:
-                'Aplicaciones adaptadas a los procesos '
-                    'y necesidades de su empresa.',
-                icono: Icons.code,
-                onVerDetalle: () {
-                  abrirDetalle(
-                    context,
-                    'Desarrollo de sistemas',
-                    'Diseñamos aplicaciones según los procesos '
-                        'y necesidades de cada empresa.\n\n'
-                        'El servicio contempla el análisis de '
-                        'requerimientos, diseño de interfaces, '
-                        'desarrollo y pruebas de funcionamiento.',
-                  );
-                },
-              ),
-              ServiceCard(
-                nombre: 'Soporte técnico',
-                descripcion:
-                'Asistencia para equipos, servidores '
-                    'y redes de su negocio.',
-                icono: Icons.support_agent,
-                onVerDetalle: () {
-                  abrirDetalle(
-                    context,
-                    'Soporte técnico',
-                    'Brindamos asistencia para mantener '
-                        'operativos los recursos tecnológicos '
-                        'de su negocio.\n\n'
-                        'El servicio incluye diagnóstico de '
-                        'problemas, mantenimiento y revisión '
-                        'de equipos, servidores y redes.',
-                  );
-                },
-              ),
-            ],
+              ],
+            ),
+          ),
+          const SizedBox(height: 28),
+          const Text(
+            'Explora nuestros servicios',
+            style: TextStyle(
+              color: azul,
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 16),
+          _servicio(
+            context,
+            icono: Icons.receipt_long_outlined,
+            nombre: 'Facturación electrónica',
+            resumen: 'Organiza tus ventas y comprobantes.',
+            detalle:
+            'Emisión de comprobantes electrónicos y organización '
+                'de ventas.\n\nIncluye configuración inicial, '
+                'capacitación y acompañamiento.',
+          ),
+          _servicio(
+            context,
+            icono: Icons.code,
+            nombre: 'Desarrollo de sistemas',
+            resumen: 'Software adaptado a tu empresa.',
+            detalle:
+            'Desarrollo de aplicaciones según los procesos '
+                'de cada empresa.\n\nIncluye análisis de '
+                'requerimientos, diseño, desarrollo y pruebas.',
+          ),
+          _servicio(
+            context,
+            icono: Icons.support_agent,
+            nombre: 'Soporte técnico',
+            resumen: 'Mantén tu tecnología funcionando.',
+            detalle:
+            'Asistencia para equipos, servidores y redes.'
+                '\n\nIncluye diagnóstico, mantenimiento '
+                'y revisión de recursos tecnológicos.',
+          ),
+          const SizedBox(height: 12),
+          const Center(
+            child: Text(
+              'CYNERIS · Soluciones tecnológicas',
+              style: TextStyle(color: verde),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _servicio(
+      BuildContext context, {
+        required IconData icono,
+        required String nombre,
+        required String resumen,
+        required String detalle,
+      }) {
+    return Card(
+      color: Colors.white,
+      elevation: 0,
+      margin: const EdgeInsets.only(bottom: 14),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18),
+        side: const BorderSide(color: Color(0xFFDDE5ED)),
+      ),
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(16),
+        leading: CircleAvatar(
+          backgroundColor: const Color(0xFFDDF3F0),
+          child: Icon(icono, color: verde),
+        ),
+        title: Text(
+          nombre,
+          style: const TextStyle(
+            color: azul,
+            fontWeight: FontWeight.bold,
           ),
         ),
+        subtitle: Padding(
+          padding: const EdgeInsets.only(top: 6),
+          child: Text(resumen),
+        ),
+        trailing: const Icon(
+          Icons.chevron_right,
+          color: verde,
+        ),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => DetailScreen(
+                nombreServicio: nombre,
+                descripcion: detalle,
+              ),
+            ),
+          );
+        },
       ),
     );
   }
